@@ -1,15 +1,16 @@
 package com.stackly.hrms.service;
 
-import com.stackly.hrms.entity.Employee;
+import com.stackly.hrms.dto.EmployeeRequestDTO;
+import com.stackly.hrms.dto.EmployeeResponseDTO;
 
 import java.util.List;
 
 
 public interface EmployeeService {
 
-    Employee createEmployee(Employee employee);
+    EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto);
 
-    List<Employee> getAllEmployees();
+    List<EmployeeResponseDTO> getAllEmployees();
 
-    Employee getEmployeeById(Long id);
+    EmployeeResponseDTO getEmployeeById(Long id);
 }

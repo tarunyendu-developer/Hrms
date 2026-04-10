@@ -1,7 +1,9 @@
 package com.stackly.hrms.controller;
 
-import com.stackly.hrms.entity.Employee;
+import com.stackly.hrms.dto.EmployeeRequestDTO;
+import com.stackly.hrms.dto.EmployeeResponseDTO;
 import com.stackly.hrms.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +16,20 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
- // Create Employee
+    // Create Employee
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
+    public EmployeeResponseDTO createEmployee(@Valid @RequestBody EmployeeRequestDTO dto) {
+        return employeeService.createEmployee(dto);
     }
 
     //Get all employees
     @GetMapping
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeResponseDTO> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
-
-   // Get employee by ID
+    // Get Employee By ID
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
+    public EmployeeResponseDTO getEmployeeById(@PathVariable Long id) {
         return employeeService.getEmployeeById(id);
     }
 }
