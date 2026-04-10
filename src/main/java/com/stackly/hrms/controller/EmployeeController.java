@@ -2,11 +2,13 @@ package com.stackly.hrms.controller;
 
 import com.stackly.hrms.dto.EmployeeRequestDTO;
 import com.stackly.hrms.dto.EmployeeResponseDTO;
+import com.stackly.hrms.exception.ApiResponse;
 import com.stackly.hrms.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -18,18 +20,43 @@ public class EmployeeController {
 
     // Create Employee
     @PostMapping
-    public EmployeeResponseDTO createEmployee(@Valid @RequestBody EmployeeRequestDTO dto) {
-        return employeeService.createEmployee(dto);
+    public ApiResponse<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeRequestDTO dto) {
+
+        EmployeeResponseDTO response = employeeService.createEmployee(dto);
+
+        return ApiResponse.<EmployeeResponseDTO>builder()
+                .success(true)
+                .message("Employee created successfully")
+                .data(response)
+                .timestamp(LocalDateTime.now())
+                .build();
     }
 
-    //Get all employees
+   //Get all employees
     @GetMapping
-    public List<EmployeeResponseDTO> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public ApiResponse<List<EmployeeResponseDTO>> getAllEmployees() {
+
+        List<EmployeeResponseDTO> list = employeeService.getAllEmployees();
+
+        return ApiResponse.<List<EmployeeResponseDTO>>builder()
+                .success(true)
+                .message("Employees fetched successfully")
+                .data(list)
+                .timestamp(LocalDateTime.now())
+                .build();
     }
-    // Get Employee By ID
+
+    // Get employee by ID
     @GetMapping("/{id}")
-    public EmployeeResponseDTO getEmployeeById(@PathVariable Long id) {
-        return employeeService.getEmployeeById(id);
+    public ApiResponse<EmployeeResponseDTO> getEmployeeById(@PathVariable Long id) {
+
+        EmployeeResponseDTO emp = employeeService.getEmployeeById(id);
+
+        return ApiResponse.<EmployeeResponseDTO>builder()
+                .success(true)
+                .message("Employee fetched successfully")
+                .data(emp)
+                .timestamp(LocalDateTime.now())
+                .build();
     }
 }
