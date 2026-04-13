@@ -31,6 +31,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     // Get all departments
     @Override
     public List<Department> getAllDepartments() {
+
         return departmentRepository.findAll();
     }
 
@@ -38,7 +39,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department updateDepartment(Long id, Department department) {
 
-        Department existing = departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+        Department existing = departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
 
         existing.setName(department.getName());
         existing.setDescription(department.getDescription());
@@ -50,7 +52,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void deleteDepartment(Long id) {
 
-        Department dept = departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+        Department dept = departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
 
         departmentRepository.delete(dept);
     }
