@@ -7,6 +7,7 @@ import com.stackly.hrms.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +20,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     // Create Employee
+    @PreAuthorize("hasAnyRole('ADMIN','HR_MANAGER')")
     @PostMapping
     public ApiResponse<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeRequestDTO dto) {
 
@@ -33,6 +35,7 @@ public class EmployeeController {
     }
 
    //Get all employees
+   @PreAuthorize("hasAnyRole('ADMIN','HR_MANAGER')")
     @GetMapping
     public ApiResponse<List<EmployeeResponseDTO>> getAllEmployees() {
 
@@ -47,6 +50,7 @@ public class EmployeeController {
     }
 
     // Get employee by ID
+    @PreAuthorize("hasAnyRole('ADMIN','HR_MANAGER','EMPLOYEE')")
     @GetMapping("/{id}")
     public ApiResponse<EmployeeResponseDTO> getEmployeeById(@PathVariable Long id) {
 

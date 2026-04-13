@@ -25,17 +25,13 @@ public class User {
     // Encrypted password
     private String password;
 
-    /*
-     * Role of user
-     */
+    // Role of user
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private boolean active;
+    private Boolean active;
 
-    /*
-     * Link with Employee
-     */
+    // Link with Employee
     @OneToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;

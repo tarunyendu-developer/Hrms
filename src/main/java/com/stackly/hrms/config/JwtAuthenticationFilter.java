@@ -1,14 +1,19 @@
 package com.stackly.hrms.config;
 
+import com.stackly.hrms.entity.User;
+import com.stackly.hrms.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 //This filter runs once per request
 @Component
@@ -16,6 +21,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -43,11 +49,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (jwtUtil.isTokenValid(token, username)) {
 
                 // Set authentication (simple for now)
-                var auth = new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
-                        username, null, null
-                );
+                User user = userRepository.findByUsername(username).orElse(null);
 
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                if (user != null) {
+
+                    var authorities = List.of(new SimpleGrantedAuthority(user.getRole().name()));
+
+                    var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
+
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             }
         }
 
