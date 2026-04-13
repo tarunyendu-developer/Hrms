@@ -1,9 +1,10 @@
-package com.stackly.hrms.service;
+package com.stackly.hrms.service.impl;
 
 import com.stackly.hrms.entity.Department;
 import com.stackly.hrms.exception.BusinessException;
 import com.stackly.hrms.exception.ResourceNotFoundException;
 import com.stackly.hrms.repository.DepartmentRepository;
+import com.stackly.hrms.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

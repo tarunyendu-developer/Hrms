@@ -36,7 +36,7 @@ public class EmployeeRequestDTO {
     private String designation;
 
     @NotNull(message = "Salary is required")
-    private BigDecimal basicSalary;
+    private BigDecimal salary;
 
     private Long departmentId;
 }

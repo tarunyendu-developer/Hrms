@@ -1,8 +1,10 @@
-import com.stackly.hrms.entity.Employee;
+package com.stackly.hrms.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "leave_requests")
@@ -41,6 +43,6 @@ public class LeaveRequest {
     @ManyToOne
     @JoinColumn(name = "approved_by")
     private Employee approvedBy;
-
+    private String managerComments;
     private LocalDateTime appliedAt;
 }

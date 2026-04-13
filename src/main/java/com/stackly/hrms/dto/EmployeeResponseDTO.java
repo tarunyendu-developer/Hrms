@@ -21,7 +21,7 @@ public class EmployeeResponseDTO {
     private String email;
 
     private String designation;
-    private BigDecimal basicSalary;
+    private BigDecimal salary;
 
     private String status;
 

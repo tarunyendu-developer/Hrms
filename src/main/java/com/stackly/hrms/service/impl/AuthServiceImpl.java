@@ -1,9 +1,10 @@
-package com.stackly.hrms.service;
+package com.stackly.hrms.service.impl;
 
 import com.stackly.hrms.entity.Role;
 import com.stackly.hrms.entity.User;
 import com.stackly.hrms.exception.BusinessException;
 import com.stackly.hrms.repository.UserRepository;
+import com.stackly.hrms.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,9 +35,7 @@ public class AuthServiceImpl implements AuthService {
                 });
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         user.setRole(Role.ROLE_EMPLOYEE);
-
         user.setActive(true);
 
         return userRepository.save(user);

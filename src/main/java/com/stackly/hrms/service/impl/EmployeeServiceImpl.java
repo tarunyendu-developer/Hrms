@@ -1,4 +1,4 @@
-package com.stackly.hrms.service;
+package com.stackly.hrms.service.impl;
 
 import com.stackly.hrms.dto.EmployeeRequestDTO;
 import com.stackly.hrms.dto.EmployeeResponseDTO;
@@ -7,6 +7,7 @@ import com.stackly.hrms.entity.EmployeeStatus;
 import com.stackly.hrms.exception.BusinessException;
 import com.stackly.hrms.exception.ResourceNotFoundException;
 import com.stackly.hrms.repository.EmployeeRepository;
+import com.stackly.hrms.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .dateOfBirth(dto.getDateOfBirth())
                 .joiningDate(dto.getJoiningDate())
                 .designation(dto.getDesignation())
-                .basicSalary(dto.getBasicSalary())
+                .salary(dto.getSalary())
                 .status(EmployeeStatus.ACTIVE)
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -58,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .lastName(saved.getLastName())
                 .email(saved.getEmail())
                 .designation(saved.getDesignation())
-                .basicSalary(saved.getBasicSalary())
+                .salary(saved.getSalary())
                 .status(saved.getStatus().name())
                 .joiningDate(saved.getJoiningDate())
                 .build();
@@ -76,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         .lastName(emp.getLastName())
                         .email(emp.getEmail())
                         .designation(emp.getDesignation())
-                        .basicSalary(emp.getBasicSalary())
+                        .salary(emp.getSalary())
                         .status(emp.getStatus().name())
                         .joiningDate(emp.getJoiningDate())
                         .build()
@@ -97,7 +98,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .lastName(emp.getLastName())
                 .email(emp.getEmail())
                 .designation(emp.getDesignation())
-                .basicSalary(emp.getBasicSalary())
+                .salary(emp.getSalary())
                 .status(emp.getStatus().name())
                 .joiningDate(emp.getJoiningDate())
                 .build();

@@ -51,7 +51,7 @@ public class Employee {
     private EmployeeStatus status;
 
     @Column(nullable = false)
-    private BigDecimal basicSalary;
+    private BigDecimal salary;
 
 
     @ManyToOne
